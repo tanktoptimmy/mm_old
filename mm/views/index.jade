@@ -1,0 +1,73 @@
+extends layout
+
+block head
+  #link(rel='stylesheet', href='/javascripts/vendor/')
+
+  script(type='text/javascript', src='/javascripts/controllers/MissingMenController.js')
+
+block content
+
+  form(action="/uploadImage", method="post", enctype="multipart/form-data")
+    label Title:
+      input(type="text", name="title")
+    label Tag:  
+      input(type="text", name="tag")
+      input(type="file", name="image")
+      button(type="submit", value="Upload") Upload File
+  
+
+  div.container(ng-controller="MissingMenController", ng-init="setMatches( #{JSON.stringify(matches)} )")
+    h1 My Match List
+
+    h2 Add New
+    form(novalidate, ng-submit="addNewMatch()")
+      div
+        label Match name:
+          input( ng-model="newMatch.matchName")
+      br
+      div
+        label Home match:
+          select(ng-model="newMatch.homeMatch")
+            - var vals = [true,false]
+            each val in vals
+              option #{val}
+      br
+      div
+        label Home Flag:
+          input(ng-model="newMatch.homeFlag" type='text')
+      br
+      div
+        label Description:
+          textarea(ng-model="newMatch.description" type='text')
+      br
+      div
+        label Date Played:
+          input(ng-model='newMatch.datePlayed' type='date')
+      br
+      div
+        label Formation:
+          select(ng-model="newMatch.formation")
+            - var vals = ['442','451','352']
+            each val in vals
+              option #{val}
+      br
+      div
+        label Goalie name:
+        input(ng-model='newMatch.goalie' type='input')
+        br
+      - for (var i = 2; i < 11; ++i) {
+      div
+        label Players name:
+        input(ng-model='newMatch.player'+i  type='input')
+        br
+      - }
+      div
+        label Created by:
+        input(ng-model='newMatch.createdBy' type='input')
+        br
+      button.btn.btn-primary(type="submit") Add Match
+    h2 Matches set
+    div
+      div.row.match(ng-repeat="match in matches")
+        div
+          {{match.matchName}}

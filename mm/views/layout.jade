@@ -1,0 +1,15 @@
+doctype html
+html(ng-app="MissingMenModule")
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+
+    script(type='text/javascript', src='/javascripts/vendor/angular/angular.js')
+    script(type='text/javascript', src='/javascripts/vendor/upload/angular-file-upload.js')
+    script(type='text/javascript', src='/javascripts/vendor/angular-bootstrap/ui-bootstrap-tpls.js')
+    script(type='text/javascript', src='/javascripts/MissingMenModule.js')
+
+    block head
+
+  body
+    block content
